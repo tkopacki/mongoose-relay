@@ -8,6 +8,7 @@ let Chanels = {
     add: function(args) {
         this.chanels[args.name] = args;
         GPIO.set_mode(args.pin, GPIO.MODE_OUTPUT);
+        this.off(args);
         print('Chanel', args.name, "added on pin:", args.pin);
     },
     get: function(args) {
@@ -18,14 +19,16 @@ let Chanels = {
     },
     on: function(args) {
         GPIO.write(this.getPin(args.name), Cfg.get('relay.config.stateOn'));
+        this.chanels[args.name].state = "ON";
         print('Chanel', args.name, 'set to ON');
     },
     off: function(args) {
         GPIO.write(this.getPin(args.name), Cfg.get('relay.config.stateOff'));
+        this.chanels[args.name].state = "OFF";
         print('Chanel', args.name, 'set to OFF');
     },
     getState: function(args) {
-        return GPIO.read(this.getPin(args.name));
+        return this.chanels[args.name].state;
     }
 };
 
@@ -49,6 +52,6 @@ function registerRPCs() {
 
 print("Initializing relays...");
 init();
-print("Registering relay on RPC");
+print("Registering relays on RPC...");
 registerRPCs();
 print("Relay initialization done.");
