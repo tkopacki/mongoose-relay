@@ -24,7 +24,7 @@ let Chanels = {
         print('Chanel', args.name, 'set to OFF');
     },
     getState: function(args) {
-        return this.chanels[args.name].state;
+        return this.get(name).state;
     }
 };
 
@@ -44,7 +44,8 @@ function init() {
 function registerRPCs() {
     RPC.addHandler('Relay.on', Chanels.on);
     RPC.addHandler('Relay.off', Chanels.off);
-    RPC.addHandler('Relay.get', Chanels.getState);
+    RPC.addHandler('Relay.get', Chanels.get);
+    RPC.addHandler('Relay.getState', Chanels.getState);
 }
 
 print("Initializing relays...");
