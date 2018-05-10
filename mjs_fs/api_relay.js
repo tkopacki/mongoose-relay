@@ -8,7 +8,6 @@ let Chanels = {
     add: function(args) {
         this.chanels[args.name] = args;
         GPIO.set_mode(args.pin, GPIO.MODE_OUTPUT);
-        this.off(args);
         print('Chanel', args.name, "added on pin:", args.pin);
     },
     get: function(args) {
@@ -37,6 +36,7 @@ function init() {
         let enabledChanelsArray = StringUtils.split(enabledChanels, ',');
         for(let idx = 0 ; idx < enabledChanelsArray.length ; idx++) {
             Chanels.add({'name': enabledChanelsArray[idx], 'pin': Cfg.get('relay.chanels.' + enabledChanelsArray[idx] + '.pin')});
+            Chanels.off({'name': enabledChanelsArray[idx]});
         }
     }
 }
