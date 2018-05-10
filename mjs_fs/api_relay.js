@@ -11,18 +11,15 @@ let Chanels = {
         print('Chanel', args.name, "added on pin:", args.pin);
     },
     get: function(args) {
-        print(args);
-        print(args.name);
-        print(this.chanels);
         return this.chanels[args.name];
     },
     on: function(args) {
-        GPIO.write(this.get(args.name).pin, Cfg.get('relay.config.stateOn'));
+        GPIO.write(this.get(args).pin, Cfg.get('relay.config.stateOn'));
         this.chanels[args.name].state = "ON";
         print('Chanel', args.name, 'set to ON');
     },
     off: function(args) {
-        GPIO.write(this.get(args.name).pin, Cfg.get('relay.config.stateOff'));
+        GPIO.write(this.get(args).pin, Cfg.get('relay.config.stateOff'));
         this.chanels[args.name].state = "OFF";
         print('Chanel', args.name, 'set to OFF');
     },
