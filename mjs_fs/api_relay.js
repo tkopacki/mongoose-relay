@@ -7,14 +7,13 @@ let Chanels = {
     chanels: [],
     add: function(args) {
         this.chanels[args.name] = args;
-        print(this.chanels);
-        print(this.chanels[args.name]);
         GPIO.set_mode(args.pin, GPIO.MODE_OUTPUT);
         print('Chanel', args.name, "added on pin:", args.pin);
     },
     get: function(args) {
-        let chanel = this.chanels[args.name];
-        print(chanel);
+        print(args);
+        print(args.name);
+        print(this.chanels);
         return this.chanels[args.name];
     },
     on: function(args) {
