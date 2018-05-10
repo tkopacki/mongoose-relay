@@ -5,25 +5,25 @@ load('api_rpc.js');
 
 let Chanels = {
     chanels: [],
-    add: function(args) {
-        this.chanels[args.name] = args;
-        GPIO.set_mode(args.pin, GPIO.MODE_OUTPUT);
-        print('Chanel', args.name, "added on pin:", args.pin);
+    add: function(name, pin) {
+        this.chanels[name] = {"name": name, "pin": pin};
+        GPIO.set_mode(pin, GPIO.MODE_OUTPUT);
+        print('Chanel', name, "added on pin:", pin);
     },
-    get: function(args) {
-        return this.chanels[args.name];
+    get: function(name) {
+        return this.chanels[name];
     },
-    on: function(args) {
-        GPIO.write(this.get(args).pin, Cfg.get('relay.config.stateOn'));
-        this.chanels[args.name].state = "ON";
-        print('Chanel', args.name, 'set to ON');
+    on: function(name) {
+        GPIO.write(this.get(name).pin, Cfg.get('relay.config.stateOn'));
+        this.chanels[name].state = "ON";
+        print('Chanel', name, 'set to ON');
     },
-    off: function(args) {
-        GPIO.write(this.get(args).pin, Cfg.get('relay.config.stateOff'));
-        this.chanels[args.name].state = "OFF";
-        print('Chanel', args.name, 'set to OFF');
+    off: function(name) {
+        GPIO.write(this.get(name).pin, Cfg.get('relay.config.stateOff'));
+        this.chanels[name].state = "OFF";
+        print('Chanel', name, 'set to OFF');
     },
-    getState: function(args) {
+    getState: function(name) {
         return this.get(name).state;
     }
 };
@@ -35,17 +35,17 @@ function init() {
     } else {
         let enabledChanelsArray = StringUtils.split(enabledChanels, ',');
         for(let idx = 0 ; idx < enabledChanelsArray.length ; idx++) {
-            Chanels.add({'name': enabledChanelsArray[idx], 'pin': Cfg.get('relay.chanels.' + enabledChanelsArray[idx] + '.pin')});
-            Chanels.off({'name': enabledChanelsArray[idx]});
+            Chanels.add(enabledChanelsArray[idx], Cfg.get('relay.chanels.' + enabledChanelsArray[idx] + '.pin'));
+            Chanels.off(enabledChanelsArray[idx]);
         }
     }
 }
 
 function registerRPCs() {
-    RPC.addHandler('Relay.on', Chanels.on);
-    RPC.addHandler('Relay.off', Chanels.off);
-    RPC.addHandler('Relay.get', function(args){return Chanels.get(args);});
-    RPC.addHandler('Relay.getState', Chanels.getState);
+    RPC.addHandler('Relay.on', function(args){return Chanels.on(args.name)});
+    RPC.addHandler('Relay.off', function(args){return Chanels.off(args.name)});
+    RPC.addHandler('Relay.get', function(args){return Chanels.get(args.name)});
+    RPC.addHandler('Relay.getState', function(args){Chanels.getState(args.name)});
 }
 
 print("Initializing relays...");
