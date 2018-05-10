@@ -1,6 +1,6 @@
 load('api_config.js');
 load('api_string.js');
-load('api_gpio.js')
+load('api_gpio.js');
 
 let Chanels = {
     chanels: [],
@@ -26,7 +26,7 @@ let Chanels = {
     getState: function(args) {
         return GPIO.read(this.getPin(args.name));
     }
-}
+};
 
 function init() {
     let enabledChanels = Cfg.get('relay.chanels.enabled');
