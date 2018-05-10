@@ -27,7 +27,7 @@ let Chanels = {
         return GPIO.read(this.getPin(args.name));
     }
 };
-/*
+
 function init() {
     let enabledChanels = Cfg.get('relay.chanels.enabled');
     if(enabledChanels === undefined) {
@@ -40,12 +40,11 @@ function init() {
     }
 }
 
-function registerRPCs() {
+/*function registerRPCs() {
     RPC.addHandler('Relay.on', Chanels.on);
     RPC.addHandler('Relay.off', Chanels.off);
     RPC.addHandler('Relay.get', Chanels.getState);
-}
+}*/
 
 init();
-registerRPCs();
-*/
+//registerRPCs();
