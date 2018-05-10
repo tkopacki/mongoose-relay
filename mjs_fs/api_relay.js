@@ -44,7 +44,7 @@ function init() {
 function registerRPCs() {
     RPC.addHandler('Relay.on', Chanels.on);
     RPC.addHandler('Relay.off', Chanels.off);
-    RPC.addHandler('Relay.get', Chanels.get);
+    RPC.addHandler('Relay.get', function(args){return Chanels.get(args);});
     RPC.addHandler('Relay.getState', Chanels.getState);
 }
 
