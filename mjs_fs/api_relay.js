@@ -34,7 +34,7 @@ function init() {
         print('Relay configuration is missing !');
     } else {
         let enabledChanelsArray = StringUtils.split(enabledChanels, ',');
-        for(let idx in enabledChanelsArray) {
+        for(let idx = 0 ; idx < enabledChanelsArray.length ; idx++) {
             Chanels.add({'name': enabledChanelsArray[idx], 'pin': Cfg.get('relay.chanels.' + enabledChanelsArray[idx] + '.pin')});
         }
     }
@@ -46,5 +46,8 @@ function registerRPCs() {
     RPC.addHandler('Relay.get', Chanels.getState);
 }
 
+print("Initializing relays...");
 init();
+print("Registering relay on RPC");
 registerRPCs();
+print("Relay initialization done.");
