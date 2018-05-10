@@ -43,9 +43,9 @@ function init() {
 
 function registerRPCs() {
     RPC.addHandler('Relay.on', function(args){Chanels.on(args.name); return {"result": "State changed to ON"}});
-    RPC.addHandler('Relay.off', function(args){return Chanels.off(args.name); return {"result": "State changed to OFF"}});
+    RPC.addHandler('Relay.off', function(args){Chanels.off(args.name); return {"result": "State changed to OFF"}});
     RPC.addHandler('Relay.get', function(args){return Chanels.get(args.name)});
-    RPC.addHandler('Relay.getState', function(args){Chanels.getState(args.name)});
+    RPC.addHandler('Relay.getState', function(args){return {"state": Chanels.getState(args.name)}});
 }
 
 print("Initializing relays...");
