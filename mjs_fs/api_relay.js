@@ -35,16 +35,16 @@ function init() {
     } else {
         let enabledChanelsArray = StringUtils.split(enabledChanels, ',');
         for(let idx in enabledChanelsArray) {
-            Chanels.add({'name': Cfg.get(enabledChanelsArray[idx]), 'pin': Cfg.get('relay.chanels.' + enabledChanelsArray[idx] + '.pin')});
+            Chanels.add({'name': enabledChanelsArray[idx], 'pin': Cfg.get('relay.chanels.' + enabledChanelsArray[idx] + '.pin')});
         }
     }
 }
 
-/*function registerRPCs() {
+function registerRPCs() {
     RPC.addHandler('Relay.on', Chanels.on);
     RPC.addHandler('Relay.off', Chanels.off);
     RPC.addHandler('Relay.get', Chanels.getState);
-}*/
+}
 
 init();
-//registerRPCs();
+registerRPCs();
