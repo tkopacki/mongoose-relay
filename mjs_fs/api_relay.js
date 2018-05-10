@@ -1,6 +1,7 @@
 load('api_config.js');
 load('api_string.js');
 load('api_gpio.js');
+load('api_rpc.js');
 
 let Chanels = {
     chanels: [],
