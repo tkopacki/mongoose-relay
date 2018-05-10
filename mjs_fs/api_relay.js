@@ -11,6 +11,8 @@ let Chanels = {
         print('Chanel', args.name, "added on pin:", args.pin);
     },
     get: function(args) {
+        let chanel = this.chanels[args.name];
+        print(chanel);
         return this.chanels[args.name];
     },
     on: function(args) {
