@@ -23,8 +23,8 @@ config_schema:
   - ["relay.chanels.chanel4.pin", "i", 2, {title: "Pin for the forth chanel"}]
   - ["relay.chanels.enabled", "s", "chanel1, chanel2, chanel3, chanel4", {title: "Coma spearted list of enabled chanels"}]
   - ["relay.config", "o", {title: "Common settings"}]
-  - ["relay.config.stateOn", "d", 1, {title: "Pin state for ON signal"}]
-  - ["relay.config.stateOff", "d", 0, {title: "Pin state for OFF signal"}]
+  - ["relay.config.stateOn", "d", 0, {title: "Pin state for ON signal"}]
+  - ["relay.config.stateOff", "d", 1, {title: "Pin state for OFF signal"}]
 
 libs:
   - origin: https://github.com/mongoose-os-libs/rpc-service-gpio
