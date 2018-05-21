@@ -49,5 +49,5 @@ function registerRPCs() {
 print("Initializing relays...");
 init();
 print("Registering relays on RPC...");
-//registerRPCs();
+registerRPCs();
 print("Relay initialization done.");
