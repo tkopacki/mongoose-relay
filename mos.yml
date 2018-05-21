@@ -17,7 +17,7 @@ config_schema:
   - ["relay.chanels.chanel3.pin", "i", 3, {title: "Pin for the third chanel"}]
   - ["relay.chanels.chanel4", "o", {title: "Forth chanel settings"}]
   - ["relay.chanels.chanel4.pin", "i", 4, {title: "Pin for the forth chanel"}]
-  - ["relay.chanels.enabled", "s", "chanel1, chanel2, chanel3, chanel4", {title: "Coma spearted list of enabled chanels"}]
+  - ["relay.chanels.enabled", "s", "", {title: "Coma spearted list of enabled chanels"}]
   - ["relay.config", "o", {title: "Common settings"}]
   - ["relay.config.stateOn", "d", 1, {title: "Pin state for ON signal"}]
   - ["relay.config.stateOff", "d", 0, {title: "Pin state for OFF signal"}]
