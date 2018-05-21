@@ -23,6 +23,9 @@ config_schema:
   - ["relay.config.stateOff", "d", 0, {title: "Pin state for OFF signal"}]
 
 libs:
+  - origin: https://github.com/mongoose-os-libs/rpc-service-gpio
+  - origin: https://github.com/mongoose-os-libs/rpc-service-config
+  - origin: https://github.com/mongoose-os-libs/rpc-service-fs
   - origin: https://github.com/mongoose-os-libs/rpc-uart
   - origin: https://github.com/mongoose-os-libs/mjs
   - origin: https://github.com/tkopacki/mongoose-string-utils
