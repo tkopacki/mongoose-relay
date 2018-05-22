@@ -22,7 +22,7 @@ let Chanels = {
         print('Chanel', name, 'set to OFF');
     },
     getState: function(name) {
-        return GPIO.read(this.get(name).pin);
+        return GPIO.read(this.get(name).pin) === Cfg.get('relay.config.stateOn') ? "ON" : "OFF";
     }
 };
 
