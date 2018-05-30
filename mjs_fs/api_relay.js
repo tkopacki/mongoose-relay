@@ -3,23 +3,23 @@ load('api_string.js');
 load('api_gpio.js');
 load('api_rpc.js');
 
-let Chanels = {
-    chanels: [],
+let Channels = {
+    channels: [],
     add: function(name, pin) {
-        this.chanels[name] = {"name": name, "pin": pin};
+        this.channels[name] = {"name": name, "pin": pin};
         GPIO.set_mode(pin, GPIO.MODE_OUTPUT);
-        print('Chanel', name, "added on pin:", pin);
+        print('Channel', name, "added on pin:", pin);
     },
     get: function(name) {
-        return this.chanels[name];
+        return this.channels[name];
     },
     on: function(name) {
         GPIO.write(this.get(name).pin, Cfg.get('relay.config.stateOn'));
-        print('Chanel', name, 'set to ON');
+        print('Channel', name, 'set to ON');
     },
     off: function(name) {
         GPIO.write(this.get(name).pin, Cfg.get('relay.config.stateOff'));
-        print('Chanel', name, 'set to OFF');
+        print('Channel', name, 'set to OFF');
     },
     getState: function(name) {
         return GPIO.read(this.get(name).pin) === Cfg.get('relay.config.stateOn') ? "ON" : "OFF";
@@ -27,14 +27,17 @@ let Chanels = {
 };
 
 function init() {
-    let enabledChanels = Cfg.get('relay.chanels.enabled');
-    if(enabledChanels === undefined) {
+    let enabledChannels = Cfg.get('relay.channels.enabled');
+    if(enabledChannels === undefined) {
         print('Relay configuration is missing !');
     } else {
-        let enabledChanelsArray = StringUtils.split(enabledChanels, ',');
-        for(let idx = 0 ; idx < enabledChanelsArray.length ; idx++) {
-            Chanels.add(enabledChanelsArray[idx], Cfg.get('relay.chanels.' + enabledChanelsArray[idx] + '.pin'));
-            Chanels.off(enabledChanelsArray[idx]);
+        let enabledChannelsArray = StringUtils.split(enabledChannels, ',');
+        print('Enabled channels:', enabledChannelsArray);
+        for(let idx = 0 ; idx < enabledChannelsArray.length ; idx++) {
+            print("Initialiazing channel", idx);
+            Channels.add(enabledChannelsArray[idx], Cfg.get('relay.channels.' + enabledChannelsArray[idx] + '.pin'));
+            Channels.off(enabledChannelsArray[idx]);
+            print("Channel", idx, "initialized");
         }
     }
 }
