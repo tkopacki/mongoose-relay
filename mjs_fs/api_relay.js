@@ -6,6 +6,7 @@ load('api_rpc.js');
 let Channels = {
     channels: [],
     add: function(name, pin) {
+        print('Got request to add channel', name, "on pin", pin);
         this.channels[name] = {"name": name, "pin": pin};
         GPIO.set_mode(pin, GPIO.MODE_OUTPUT);
         print('Channel', name, "added on pin:", pin);
@@ -32,9 +33,9 @@ function init() {
         print('Relay configuration is missing !');
     } else {
         let enabledChannelsArray = StringUtils.split(enabledChannels, ',');
-        print('Enabled channels:', enabledChannelsArray);
+        print('Enabled channels:', enabledChannelsArray.length);
         for(let idx = 0 ; idx < enabledChannelsArray.length ; idx++) {
-            print("Initialiazing channel", idx);
+            print("Initialiazing channel", enabledChannelsArray[idx]);
             Channels.add(enabledChannelsArray[idx], Cfg.get('relay.channels.' + enabledChannelsArray[idx] + '.pin'));
             Channels.off(enabledChannelsArray[idx]);
             print("Channel", idx, "initialized");
